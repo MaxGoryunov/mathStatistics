@@ -1,0 +1,68 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sbn
+import math
+
+def Normal(n):
+    return np.random.normal(0, 1, n)
+
+def Cauchy(n):
+    return np.random.standard_cauchy(n)
+
+def Student(n):
+    return np.random.standard_t(3, n)
+
+def Poisson(n):
+    return np.random.poisson(10, n)
+
+def Uni(n):
+    return np.random.uniform(-math.sqrt(3), math.sqrt(3), n)
+
+distributions = [
+    ('normal', Normal, -10, 10),
+    ('cauchy', Cauchy, -10, 10),
+    ('student', Student, -10, 10),
+    ('poisson', Poisson, -50, 50),
+    ('uniform', Uni, -10, 10),
+]
+
+def drawPlots(label, func, bound):
+    figure, axes = plt.subplots(1, 3, figsize=(20, 10))
+    for index, count in enumerate(ns):
+        values = func(count)
+        values = values[(values >= bound[0]) & (values <= bound[1])]
+        sbn.histplot(values, ax=axes[index], stat='density', kde=True)
+        axes[index].set_xlabel('Values')
+        axes[index].set_ylim(0, 1)
+        axes[index].set_title(f'N = {count}')
+    figure.savefig(f'{label}.jpg')
+
+ns = np.array([10, 50, 1000])
+
+label = 'Normal_distribution'
+func = Normal
+bound = [-5, 5]
+drawPlots(label, func, bound)
+
+label = 'Cauchy_distribution'
+func = Cauchy
+bound = [-5, 5]
+drawPlots(label, func, bound)
+
+label = 'Student_distribution'
+func = Student
+bound = [-5, 5]
+drawPlots(label, func, bound)
+
+label = 'Poison_distribution'
+func = Poisson
+bound = [-20, 20]
+drawPlots(label, func, bound)
+
+label = 'Uniform_distribution'
+func = Uni
+bound = [-5, 5]
+drawPlots(label, func, bound)
+
+
+np.random.poisson(1, 2)
