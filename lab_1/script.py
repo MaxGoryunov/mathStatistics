@@ -18,14 +18,6 @@ def Poisson(n):
 def Uni(n):
     return np.random.uniform(-math.sqrt(3), math.sqrt(3), n)
 
-distributions = [
-    ('normal', Normal, -10, 10),
-    ('cauchy', Cauchy, -10, 10),
-    ('student', Student, -10, 10),
-    ('poisson', Poisson, -50, 50),
-    ('uniform', Uni, -10, 10),
-]
-
 def drawPlots(label, func, bound):
     figure, axes = plt.subplots(1, 3, figsize=(20, 10))
     for index, count in enumerate(ns):
