@@ -22,10 +22,8 @@ def drawPlots(label, func, bound):
     figure, axes = plt.subplots(1, 3, figsize=(20, 10))
     for index, count in enumerate(ns):
         values = func(count)
-        values = values[(values >= bound[0]) & (values <= bound[1])]
         sbn.histplot(values, ax=axes[index], stat='density', kde=True)
         axes[index].set_xlabel('Values')
-        axes[index].set_ylim(0, 1)
         axes[index].set_title(f'N = {count}')
     figure.savefig(f'{label}.jpg')
 
