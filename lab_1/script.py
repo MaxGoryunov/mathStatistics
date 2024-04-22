@@ -21,8 +21,9 @@ def Uni(n):
 def drawPlots(label, func, bound):
     figure, axes = plt.subplots(1, 3, figsize=(20, 10))
     for index, count in enumerate(ns):
+        # print("here")
         values = func(count)
-        sbn.histplot(values, ax=axes[index], stat='density', kde=True)
+        sbn.histplot(values, ax=axes[index], stat='density', kde=True, bins=min(count//2, 10))
         axes[index].set_xlabel('Values')
         axes[index].set_title(f'N = {count}')
     figure.savefig(f'{label}.jpg')
